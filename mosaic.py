@@ -18,14 +18,14 @@ def plot(lf, ax, composite=None, yticklabels=False, xticklabels=False,
     """
 
     z_plot = lf.z.mean()
-    print z_plot
+    print(z_plot)
 
     render(ax, lf, composite=composite)
 
     ax.set_xlim(-19.0, -31.0)
     ax.set_ylim(-12.0, -4.0)
 
-    print ax.get_ylim()
+    print(ax.get_ylim())
 
     ax.set_xticks(np.arange(-31, -16, 4))
     ax.set_yticks(np.arange(-12, -3, 2))
@@ -114,7 +114,7 @@ def draw(lfs, composite=None):
     for i in range(nplots):
 
         ax = fig.add_subplot(nplots_y, nplots_x, i+1)
-        print 'plotting', i
+        print('plotting', i)
 
         idx_offset=0
         
@@ -138,5 +138,5 @@ def draw(lfs, composite=None):
 
     plt.savefig('mosaic_small.pdf')
 
-    plt.close('all')
+    #plt.close('all')
 

@@ -61,9 +61,9 @@ def plot_data(data):
     # (mpl.rcParams['axes.prop_cycle']), combined with some colours
     # from seaborn.color_palette('husl', 16).as_hex() and
     # colorbrewer2.org.
-    cs = [u'#1f77b4', u'#ff7f0e', u'#2ca02c', u'#d62728', u'#9467bd',
-          u'#8c564b', u'#e377c2', u'#7f7f7f', u'#bcbd22', u'#17becf',
-          u'#77ab31']
+    cs = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+          '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf',
+          '#77ab31']
 
     d = [x.z for x in data]
     l = [x.label for x in data]
@@ -75,7 +75,7 @@ def plot_data(data):
     zlim = (z-bin_width/2.0, z+bin_width/2.0)
     nbins = 1
     name = r'UKIDSS Mortlock et al.\ (2011)'
-    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color=u'#beaed4', 
+    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color='#beaed4', 
                                 histtype='stepfilled', ec='None',
                                 label=name)
 
@@ -83,7 +83,7 @@ def plot_data(data):
     zlim = (z-bin_width/2.0, z+bin_width/2.0)
     nbins = 1
     name = r'UKIDSS Venemans et al.\ (2015)'
-    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color=u'#f0027f', 
+    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color='#f0027f', 
                                 histtype='stepfilled', ec='None',
                                 label=name)
 
@@ -91,7 +91,7 @@ def plot_data(data):
     zlim = (z-bin_width/2.0, z+bin_width/2.0)
     nbins = 1
     name = r'ALLWISE+UKIDSS+DECaLS Ba\~nados et al.\ (2018)'
-    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color=u'#bf5b17', 
+    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color='#bf5b17', 
                                 histtype='stepfilled', ec='None',
                                 label=name)
     
@@ -180,7 +180,7 @@ data.append(s)
 sum = 0
 for x in data: 
     sum += x.z.size
-print 'Total number of AGN:', sum+3 # 3 qsos added by hand above.
+print('Total number of AGN:', sum+3) # 3 qsos added by hand above.
     
 plot_data(data)
 

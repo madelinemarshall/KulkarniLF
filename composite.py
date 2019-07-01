@@ -86,7 +86,7 @@ class selmap:
         # self.dz = dz
         # self.dm = dm 
         # print 'dz={:.3f}, dm={:.3f}, sample_id={:d}'.format(dz, dm, sample_id)
-        print 'sample_id={:d}'.format(sample_id)
+        print('sample_id={:d}'.format(sample_id))
 
         self.sid = sample_id 
 
@@ -254,7 +254,7 @@ class lf:
                                                      'disp': True})
 
         if not result.success:
-            print 'Likelihood optimisation did not converge.'
+            print('Likelihood optimisation did not converge.')
 
         self.bf = result 
         return result
@@ -348,7 +348,7 @@ class lf:
             
         plotfile = dirname+'chains.pdf' 
         plt.savefig(plotfile,bbox_inches='tight')
-        plt.close('all')
+        #plt.close('all')
         mpl.rcParams['font.size'] = '22'
         
         return
@@ -431,7 +431,7 @@ class lf_polyb:
                                                      'disp': True})
 
         if not result.success:
-            print 'Likelihood optimisation did not converge.'
+            print('Likelihood optimisation did not converge.')
 
         self.bf = result 
         return result
@@ -525,7 +525,7 @@ class lf_polyb:
             
         plotfile = dirname+'chains.pdf' 
         plt.savefig(plotfile,bbox_inches='tight')
-        plt.close('all')
+        #plt.close('all')
         mpl.rcParams['font.size'] = '22'
         
         return

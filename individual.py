@@ -2,11 +2,8 @@ import numpy as np
 import scipy.optimize as op
 import emcee
 import matplotlib as mpl
-mpl.use('Agg') 
+#mpl.use('Agg') 
 mpl.rcParams['text.usetex'] = True 
-mpl.rcParams['font.family'] = 'serif'
-mpl.rcParams['font.serif'] = 'cm'
-mpl.rcParams['font.size'] = '16'
 import matplotlib.pyplot as plt
 import triangle 
 from astropy.stats import poisson_conf_interval as pci
@@ -295,7 +292,7 @@ class lf:
                                       'disp': False})
 
         if not result.success:
-            print 'Likelihood optimisation did not converge.'
+            print('Likelihood optimisation did not converge.')
 
         self.bf = result 
         return result
@@ -330,7 +327,7 @@ class lf:
 
         return lp - self.neglnlike(theta)
 
-    def run_mcmc(self):
+    def run_mcmc(self,num_runs=1000):
         """
         Run emcee.
 
@@ -343,8 +340,10 @@ class lf:
         self.sampler = emcee.EnsembleSampler(self.nwalkers, self.ndim,
                                              self.lnprob)
 
-        self.sampler.run_mcmc(pos, 1000)
-        self.samples = self.sampler.chain[:, 500:, :].reshape((-1, self.ndim))
+        #self.sampler.run_mcmc(pos, 1000)
+        #self.samples = self.sampler.chain[:, 500:, :].reshape((-1, self.ndim))
+        self.sampler.run_mcmc(pos, num_runs)
+        self.samples = self.sampler.chain[:, int(num_runs/2):, :].reshape((-1, self.ndim))
         
 
         return
@@ -398,7 +397,7 @@ class lf:
             
         plotfile = dirname+'chains.pdf' 
         plt.savefig(plotfile,bbox_inches='tight')
-        plt.close('all')
+        #plt.close('all')
         mpl.rcParams['font.size'] = '22'
         
         return
@@ -435,7 +434,7 @@ class lf:
         """
 
         v = 0.0
-        for i in xrange(selmap.m.size):
+        for i in range(selmap.m.size):
             if (selmap.m[i] >= mrange[0]) and (selmap.m[i] < mrange[1]):
                 if (selmap.z[i] >= zrange[0]) and (selmap.z[i] < zrange[1]):
                     if selmap.sid == 7:
@@ -624,7 +623,7 @@ class lf:
         plotfile = dirname+'lf_z{0:.3f}.pdf'.format(z_plot)
         plt.savefig(plotfile, bbox_inches='tight')
 
-        plt.close('all') 
+        #plt.close('all') 
 
         return 
 

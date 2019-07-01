@@ -78,7 +78,7 @@ def get_rhoqso(lfi, mlim, z, fit='individual', mbright=-35.0):
 def cumVol(selmap, Mlim, zrange):
 
     v = 0.0
-    for i in xrange(selmap.m.size):
+    for i in range(selmap.m.size):
         if (selmap.m[i] < Mlim):
             if (selmap.z[i] >= zrange[0]) and (selmap.z[i] < zrange[1]):
                     v += selmap.volarr[i]*selmap.p[i]
@@ -95,7 +95,7 @@ def binVol(selmap, mrange, zrange):
     """
 
     v = 0.0
-    for i in xrange(selmap.m.size):
+    for i in range(selmap.m.size):
         if (selmap.m[i] >= mrange[0]) and (selmap.m[i] < mrange[1]):
             if (selmap.z[i] >= zrange[0]) and (selmap.z[i] < zrange[1]):
                 if selmap.sid == 7: # Giallongo 
@@ -120,7 +120,7 @@ def binVol2(selmap, mrange, zrange):
     assert(M_bin_l < M_bin_u) 
 
     v = 0.0
-    for i in xrange(selmap.m.size):
+    for i in range(selmap.m.size):
         if (selmap.z[i] >= zrange[0]) and (selmap.z[i] < zrange[1]):
             M_tile_l = selmap.m[i] - selmap.dm[i]/2.0
             M_tile_u = selmap.m[i] + selmap.dm[i]/2.0
@@ -315,8 +315,8 @@ def rhoqso3(lfs, mag_threshold, bins, **kwargs):
 
         Nbins = np.size(mags)
         Nsamples = len(logphis)
-        print 'Nbins=', Nbins
-        print 'Nsamples=', Nsamples
+        print('Nbins=', Nbins)
+        print('Nsamples=', Nsamples)
         total_phi = np.zeros(Nbins)
         
         for i in range(Nbins):
@@ -522,7 +522,7 @@ def draw_withGlobal_multiple(c1, c2, c3, individuals, select=False):
                scatterpoints=1)
     
     plt.savefig('rhoqso_data.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -547,7 +547,7 @@ def test(c1, individuals, **kwargs):
     dm = 0.6
     bins = np.arange(mlim+dm/2, -35, -dm)[::-1]
     zs, rhos, uperr, downerr = rhoqso3(individuals, mlim, bins=bins)
-    print 'rhos=', rhos
+    print('rhos=', rhos)
 
     # zs, rhos, uperr, downerr = rhoqso3(individuals, mlim, bins=np.arange(-30.9, mlim+0.6, 0.6))
     # print 'rhos=', rhos
@@ -557,6 +557,6 @@ def test(c1, individuals, **kwargs):
     global_cumulative(ax, c1, mlim, 'grey')
 
     plt.savefig('rhoqso_test.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return

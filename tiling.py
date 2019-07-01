@@ -13,7 +13,7 @@ data = np.loadtxt(filename)
 z_tolerance = 0.01
 mag_tolerance = 0.001 
 
-print 'Using z_tolerance = {:.4f} and mag_tolerance = {:.4f}'.format(z_tolerance, mag_tolerance)
+print('Using z_tolerance = {:.4f} and mag_tolerance = {:.4f}'.format(z_tolerance, mag_tolerance))
 
 def is_same_z(z1, z2):
 
@@ -127,10 +127,10 @@ for i, tile in enumerate(data):
     dzs.append(dz)
     dmags.append(dmag)
     
-    print '{:>5d}  {:.3f}  {:.2f}  {:.5f}  {:.4f}  {:.3f}'.format(i+1, z, mag, p, dz, dmag)
+    print('{:>5d}  {:.3f}  {:.2f}  {:.5f}  {:.4f}  {:.3f}'.format(i+1, z, mag, p, dz, dmag))
 
 dzs = np.array(dzs)
 dmags = np.array(dmags)
     
-print '# dzs =', np.unique(dzs.round(decimals=4))
-print '# dmags =', np.unique(dmags.round(decimals=4))
+print('# dzs =', np.unique(dzs.round(decimals=4)))
+print('# dmags =', np.unique(dmags.round(decimals=4)))

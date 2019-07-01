@@ -1,21 +1,23 @@
 import numpy as np
 import emcee
 import matplotlib as mpl
-mpl.use('Agg') 
+#mpl.use('Agg') 
 mpl.rcParams['text.usetex'] = True 
-mpl.rcParams['font.family'] = 'serif'
-mpl.rcParams['font.serif'] = 'cm'
-mpl.rcParams['font.size'] = '16'
 import matplotlib.pyplot as plt
 from astropy.stats import knuth_bin_width  as kbw
 from astropy.stats import poisson_conf_interval as pci
 from scipy.stats import binned_statistic as bs
 import cosmolopy.distance as cd
+import random
+
+
 cosmo = {'omega_M_0':0.3,
          'omega_lambda_0':0.7,
          'omega_k_0':0.0,
          'h':0.70}
 
+colors         = ['#e41a1c','#377eb8','#4daf4a','#984ea3',\
+                  '#ff7f00','#a65628','#f781bf','#98ff98']*4
 
 """Makes LF plots at particular redshifts.  Shows data with
 individual and composite models.  This is similar to the draw()
@@ -91,7 +93,7 @@ def binVol(self, selmap, mrange, zrange):
     """
 
     v = 0.0
-    for i in xrange(selmap.m.size):
+    for i in range(selmap.m.size):
         if (selmap.m[i] >= mrange[0]) and (selmap.m[i] < mrange[1]):
             if (selmap.z[i] >= zrange[0]) and (selmap.z[i] < zrange[1]):
                 if selmap.sid == 7: # Giallongo 
@@ -111,7 +113,7 @@ def binVol_all(self, selmap, mrange, zrange):
     """
 
     v = 0.0
-    for i in xrange(selmap.m_all.size):
+    for i in range(selmap.m_all.size):
         if (selmap.m_all[i] >= mrange[0]) and (selmap.m_all[i] < mrange[1]):
             if (selmap.z_all[i] >= zrange[0]) and (selmap.z_all[i] < zrange[1]):
                 if selmap.sid == 7: # Giallongo 
@@ -383,7 +385,7 @@ def plot_giallongo_z4p25(lf, ax, mags):
 
 
 def render(ax, lf, composite=None, showMockSample=False, show_individual_fit=True, c2=None, c3=None):
-
+ 
     """
 
     Plot data, best fit LF, and posterior LFs.
@@ -393,8 +395,8 @@ def render(ax, lf, composite=None, showMockSample=False, show_individual_fit=Tru
     z_plot = lf.z.mean() 
 
     if show_individual_fit: 
-        mag_plot = np.linspace(-32.0, -16.0, num=200) 
-        indf = plot_posterior_sample_lfs(lf, ax, (-32.0, -16.0), lw=1,
+        mag_plot = np.linspace(-32.0, -22.0, num=200) 
+        indf = plot_posterior_sample_lfs(lf, ax, (-32.0, -22.0), lw=1,
                                        c='#ffbf00', alpha=0.1, zorder=2) 
         # plot_bestfit_lf(lf, ax, mag_plot, lw=2,
         #                      c='#ffbf00', zorder=3, label='This work')
@@ -470,18 +472,30 @@ def render(ax, lf, composite=None, showMockSample=False, show_individual_fit=Tru
         c3bf, = ax.plot(mags, p, color='brown', zorder=5, lw=1)
         
         
-    cs = { 1 : '#1f77b4', # "blue"
-           6 : '#17becf', # "cyan"
-           7 : '#9467bd', # "purple"
-           8 : '#8c564b', # "brown"
-           10 : '#ff7f0e', # "orange"
-           11 : '#7f7f7f', # "grey"
-           13 : '#d62728', # "red"
+    cs = { 1 : colors[0], # "blue"
+           6 : colors[1], # "cyan"
+           7 : colors[2], # "purple"
+           8 : colors[3], # "brown"
+           10 : colors[5], # "orange"
+           11 : colors[6], # "grey"
+           13 : colors[7], # "red"
            15 : '#2ca02c', # "green"
-           17 : '#bcbd22', # "yellow"
+           17 : colors[4], # "yellow"
            18 : '#e377c2' # "pink"
     }
-    
+    #cs = { 1 : '#1f77b4', # "blue"
+    #       6 : '#17becf', # "cyan"
+    #       7 : '#9467bd', # "purple"
+    #       8 : '#8c564b', # "brown"
+    #       10 : '#ff7f0e', # "orange"
+    #       11 : '#7f7f7f', # "grey"
+    #       13 : '#d62728', # "red"
+    #       15 : '#2ca02c', # "green"
+    #       17 : '#bcbd22', # "yellow"
+    #       18 : '#e377c2' # "pink"
+    #}
+    markers        = ['o','s','v','^','<','>','p','D','8']*4
+   
     def dsl(i):
         for x in lf.maps:
             if x.sid == i:
@@ -494,26 +508,28 @@ def render(ax, lf, composite=None, showMockSample=False, show_individual_fit=Tru
     if bad_data_set:
         for i in sids: 
             mags, left, right, logphi, uperr, downerr = get_lf(lf, i, z_plot)
-            print mags[logphi>-100.0]
-            print logphi[logphi>-100.0]
+            #print((mags[logphi>-100.0]))
+            #print((logphi[logphi>-100.0]))
             ax.errorbar(mags, logphi, ecolor=cs[i], capsize=0,
                         xerr=np.vstack((left, right)), 
                         yerr=np.vstack((uperr, downerr)),
-                        fmt='None', zorder=4)
-            ax.scatter(mags, logphi, c='#ffffff', edgecolor=cs[i], zorder=4, s=16, label=dsl(i)+' (rejected bins)')
+                        fmt='None')#random.choice(markers), zorder=4,color=cs[i],markersize=3,
+                        #markerfacecolor='w', label=dsl(i)+' (rejected bins)')
+            ax.plot(mags, logphi, markerfacecolor='#ffffff', marker=random.choice(markers),markeredgecolor=cs[i], 
+                    zorder=4, markersize=3, label=dsl(i)+' (rejected bins)')
         return
 
     for i in sids[::-1]:
 
         mags, left, right, logphi, uperr, downerr = get_lf(lf, i, z_plot)
 
-        print mags[logphi>-100.0]
-        print logphi[logphi>-100.0]
-        ax.scatter(mags, logphi, c=cs[i], edgecolor='None', zorder=4, s=20, label=dsl(i))
+        #print((mags[logphi>-100.0]))
+        #print((logphi[logphi>-100.0]))
+        ax.plot(mags, logphi,linestyle='', marker=random.choice(markers), label=dsl(i), zorder=4,color=cs[i],markersize=3)
         ax.errorbar(mags, logphi, ecolor=cs[i], capsize=0,
                     xerr=np.vstack((left, right)), 
                     yerr=np.vstack((uperr, downerr)),
-                    fmt='None', zorder=4)
+                    fmt='None',zorder=3)#random.choice(markers), label=dsl(i), zorder=4,color=cs[i],markersize=3)
 
         if i == 8:
             # No need to plot rejected bins for McGreer's data because
@@ -522,8 +538,8 @@ def render(ax, lf, composite=None, showMockSample=False, show_individual_fit=Tru
             continue 
         
         mags_all, left_all, right_all, logphi_all, uperr_all, downerr_all = get_lf_all(lf, i, z_plot)
-        print mags_all[logphi_all!=logphi]
-        print logphi_all[logphi_all!=logphi]
+        #print((mags_all[logphi_all!=logphi]))
+        #print((logphi_all[logphi_all!=logphi]))
 
         select = (logphi_all!=logphi)
         mags_all = mags_all[select]
@@ -537,18 +553,18 @@ def render(ax, lf, composite=None, showMockSample=False, show_individual_fit=Tru
             ax.errorbar(mags_all, logphi_all, ecolor=cs[i], capsize=0,
                         xerr=np.vstack((left_all, right_all)), 
                         yerr=np.vstack((uperr_all, downerr_all)),
-                        fmt='None', zorder=4)
-            ax.scatter(mags_all, logphi_all, c='#ffffff', edgecolor=cs[i],
-                       zorder=4, s=16, label=dsl(i)+' (rejected bin)')
+                        fmt='None',zorder=3)#random.choice(markers), label=dsl(i)+' (rejected bin)', zorder=4,color=cs[i],markersize=3)
+            ax.plot(mags_all, logphi_all, markerfacecolor='#ffffff', markeredgecolor=cs[i],marker=random.choice(markers),markersize=3,
+                       zorder=4, label=dsl(i)+' (rejected bin)')
 
     if showMockSample:
         for i in sids:
             mags, left, right, logphi, uperr, downerr = get_lf_sample(lf, i, z_plot)
-            ax.scatter(mags, logphi, c='k', edgecolor='None', zorder=4, s=16, label=dsl(i))
+            ax.plot(mags, logphi, color='k',linestyle='', marker=random.choice(markers), label=dsl(i), zorder=4,markersize=3)
             ax.errorbar(mags, logphi, ecolor='k', capsize=0,
                         xerr=np.vstack((left, right)), 
                         yerr=np.vstack((uperr, downerr)),
-                        fmt='None', zorder=4)
+                        fmt='None',zorder=3)#random.choice(markers), label=dsl(i), zorder=4,color=cs[i],markersize=3)
 
     if c2 is not None: 
         return (indf, indbf), (c1f, c1bf), (c2f, c2bf), (c3f, c3bf)
@@ -588,11 +604,11 @@ def draw(lf, composite=None, dirname='', showMockSample=False, show_individual_f
 
     plottitle = r'${:g}\leq z<{:g}$'.format(lf.zlims[0], lf.zlims[1]) 
     plt.title(plottitle, size='medium', y=1.01)
-
+    plt.show()
     plotfile = dirname+'lf_z{0:.3f}.pdf'.format(z_plot)
     plt.savefig(plotfile, bbox_inches='tight')
 
-    plt.close('all') 
+    #plt.close('all') 
 
     return 
     

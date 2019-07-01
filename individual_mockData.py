@@ -253,7 +253,7 @@ class lf:
                              method=method)
 
         if not result.success:
-            print 'Likelihood optimisation did not converge.'
+            print('Likelihood optimisation did not converge.')
 
         self.bf = result 
         return result
@@ -356,7 +356,7 @@ class lf:
             
         plotfile = dirname+'chains.pdf' 
         plt.savefig(plotfile,bbox_inches='tight')
-        plt.close('all')
+        #plt.close('all')
         mpl.rcParams['font.size'] = '22'
         
         return
@@ -393,7 +393,7 @@ class lf:
         """
 
         v = 0.0
-        for i in xrange(selmap.m.size):
+        for i in range(selmap.m.size):
             if (selmap.m[i] >= mrange[0]) and (selmap.m[i] < mrange[1]):
                 if (selmap.z[i] >= zrange[0]) and (selmap.z[i] < zrange[1]):
                     if selmap.sid == 7:
@@ -582,7 +582,7 @@ class lf:
         plotfile = dirname+'lf_z{0:.3f}.pdf'.format(z_plot)
         plt.savefig(plotfile, bbox_inches='tight')
 
-        plt.close('all') 
+        #plt.close('all') 
 
         return 
 

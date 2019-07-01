@@ -189,7 +189,7 @@ def draw(individuals, zlims, select=False):
                handletextpad=0.1, borderpad=0.01, scatterpoints=1)
     
     plt.savefig('rhoqso.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -555,7 +555,7 @@ def draw_withGlobal_dense(composite, individuals, zlims, select=False):
                scatterpoints=1, ncol=2)
     
     plt.savefig('rhoqso_withGlobal.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -597,7 +597,7 @@ def draw_withGlobal(composite, individuals, zlims, select=False):
                scatterpoints=1)
     
     plt.savefig('rhoqso_withGlobal.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -665,7 +665,7 @@ def draw_withGlobal_multiple(c1, c2, c3, individuals, zlims, select=False):
                scatterpoints=1)
     
     plt.savefig('rhoqso_withGlobal.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -741,7 +741,7 @@ def draw_differential_dense(composite, individuals, zlims, select=False):
                scatterpoints=1, ncol=2)
     
     plt.savefig('rhoqso_diff.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -817,7 +817,7 @@ def draw_differential_dense_optimum(composite, individuals, zlims, select=False)
                scatterpoints=1, ncol=2)
     
     plt.savefig('rhoqso_diff.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -867,7 +867,7 @@ def draw_differential(composite, individuals, zlims, select=False):
                scatterpoints=1, ncol=2)
     
     plt.savefig('rhoqso_diff_ind.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
@@ -946,7 +946,7 @@ def draw_onlyGlobal(composite):
                handletextpad=0.1, borderpad=0.01, scatterpoints=1)
     
     plt.savefig('rhoqso_onlyGlobal.pdf',bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 

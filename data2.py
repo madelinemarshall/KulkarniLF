@@ -64,7 +64,7 @@ def plot_data(data):
     z = 7.085
     zlim = (z-bin_width/2.0, z+bin_width/2.0)
     nbins = 1
-    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color=u'#f77189', 
+    n, bins, patches = plt.hist(z, bins=nbins, range=zlim, color='#f77189', 
                                 histtype='stepfilled', ec='none', label='UKIDSS Mortlock et al.\ (2011)')
             
     ax.set_xlabel(r'redshift')
@@ -82,10 +82,10 @@ def plot_data(data):
     return
 
 # seaborn.color_palette('husl', 16).as_hex()
-cs = [u'#f77189', u'#f7754f', u'#dc8932', u'#c39532', u'#ae9d31', u'#97a431',
-      u'#77ab31', u'#31b33e', u'#33b07a', u'#35ae93', u'#36ada4', u'#37abb4',
-      u'#38a9c5', u'#3aa5df', u'#6e9bf4', u'#a48cf4', u'#cc7af4', u'#f45cf2',
-      u'#f565cc', u'#f66bad']
+cs = ['#f77189', '#f7754f', '#dc8932', '#c39532', '#ae9d31', '#97a431',
+      '#77ab31', '#31b33e', '#33b07a', '#35ae93', '#36ada4', '#37abb4',
+      '#38a9c5', '#3aa5df', '#6e9bf4', '#a48cf4', '#cc7af4', '#f45cf2',
+      '#f565cc', '#f66bad']
 
 shuffle(cs)
 

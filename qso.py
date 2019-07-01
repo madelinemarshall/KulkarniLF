@@ -60,7 +60,7 @@ def plot_qso_emissivity():
     ax.axvline(c_angPerSec/912.0, lw=1, c='k', dashes=[7,2])
     
     plt.savefig('e_qso.pdf', bbox_inches='tight')
-    plt.close('all')
+    #plt.close('all')
 
     return
 
