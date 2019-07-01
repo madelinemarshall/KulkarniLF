@@ -1,3 +1,12 @@
+To use:
+______
+from KulkarniLF import plot_Kulkarni
+plot_Kulkarni(redshift_min,redshift_max,axes,num_runs=10)
+
+The 10 makes it quick for testing (default is 1000)
+
+
+
 QLF
 =====
 
